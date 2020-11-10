@@ -28,3 +28,10 @@ def detail(request, id):
         'object': object,
     }
     return render(request, 'shop/detail.html', context)
+
+
+def checkout(request):
+    context = {
+
+    }
+    return render(request, 'shop/checkout.html', context)

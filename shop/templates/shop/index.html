@@ -28,7 +28,7 @@
                         <li class="nav-item">
                             <button id="cart" data-html="true" type="button" class="btn btn-secondary" data-container="body" data-toggle="popover"
                                     data-placement="bottom" data-content="Your cart is empty!">
-                                Cart
+                                Cart <span class="badge badge-light" id="cart-badge"></span>
                             </button>
                         </li>
                     </ul>
@@ -57,12 +57,12 @@
         {% for product in products %}
         <div class="col-md-3">
             <div class="card">
-                <img src="{{ product.image }}" class="card-img-top">
+                <img id="image-{{ product.id }}" src="{{ product.image }}" class="card-img-top">
                 <div class="card-body">
                     <div id="title-{{ product.id }}" class="card-title">
                         {{ product.title }}
                     </div>
-                    <div class="card-text">
+                    <div id="price-{{ product.id }}" class="card-text">
                         ${{ product.price }}
                     </div>
 
@@ -105,7 +105,7 @@
     }
 
     if (Object.keys(cart).length > 0) {
-        document.getElementById("cart").innerHTML = "Cart(" + Object.keys(cart).length + ")";
+        document.getElementById("cart-badge").innerHTML = Object.keys(cart).length;
         UpdateCart(cart);
     }
 
@@ -118,9 +118,12 @@
             cart[id] = {};
             cart[id]['amount'] = 1;
             cart[id]['title'] = document.getElementById("title-"+id).innerHTML;
+            cart[id]['price'] = document.getElementById("price-"+id).innerHTML;
+            cart[id]['image'] = document.getElementById("image-"+id).src;
         }
         localStorage.setItem('cart', JSON.stringify(cart));
-        document.getElementById("cart").innerHTML = "Cart(" + Object.keys(cart).length + ")";
+
+        document.getElementById("cart-badge").innerHTML = Object.keys(cart).length;
         UpdateCart(cart);
     });
 
@@ -131,11 +134,14 @@
     });
 
     function UpdateCart(cart) {
+
         if (Object.keys(cart).length > 0) {
             var cartInfo = "";
             for (var element_id in cart) {
                 cartInfo += cart[element_id]['title'] + ": " + cart[element_id]['amount'] + "<br>";
             }
+            button = "<a href='{% url 'checkout' %}' class='btn btn-warning' id='checkout'>Checkout</a>";
+            cartInfo += button;
             document.getElementById("cart").setAttribute('data-content', cartInfo);
         }
     }
