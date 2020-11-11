@@ -13,10 +13,25 @@
 </head>
 <body>
 <div class="container">
-        <div class="row" >
-            <div class="list-group" id="product_list">
-            </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="list-group" id="product_list">
+            </ul>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form method="POST">
+                {% for field in form %}
+                <div class="form-group">
+                    <label> {{ field.label }} </label>
+                    {{ field }}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Place Order</button>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 <script type="text/javascript">
@@ -32,28 +47,27 @@
         let price = cart[product]['price'];
         let image = cart[product]['image'];
         products = `
-        <div class="list-group-item border">
-           <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <img src="${image}" height="300px">
+        <li class="list-group-item border">
+            <div class="row">
+                <div class="col-md-9">
+                    <img src="${image}" height="50px">
+                </div>
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            ${title}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            ${price} x ${amount}
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        ${title}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        ${price} x ${amount}
-                    </div>
-                </div>
-            </div>
-        </div>`
+        </li>`
         $('#product_list').append(products);
     }
+
 </script>
 </html>

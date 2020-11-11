@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from .models import Product
+from .forms import OrderForm
 
 
 def index(request):
@@ -31,7 +32,11 @@ def detail(request, id):
 
 
 def checkout(request):
-    context = {
+    form = OrderForm(request.POST or None)
+    if form.is_valid():
+        print(form)
 
+    context = {
+        'form': form,
     }
     return render(request, 'shop/checkout.html', context)
