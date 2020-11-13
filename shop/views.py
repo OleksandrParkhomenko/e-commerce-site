@@ -34,8 +34,9 @@ def detail(request, id):
 def checkout(request):
     form = OrderForm(request.POST or None)
     if form.is_valid():
-        print(form)
-
+        form.save()
+    else:
+        print("invalid")
     context = {
         'form': form,
     }
