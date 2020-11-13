@@ -3,15 +3,15 @@
 {% block content %}
 <div class="row">
     <div class="mx-auto">
-        <form method="POST" class="">
+        <form method="POST">
             {% csrf_token %}
             {% for field in form %}
             <div class="form-group">
-                {{ field.label }}
+                <label> {{ field.label }} </label>
                 {{ field }}
             </div>
             {% endfor %}
-            <button class="btn btn-info" type="submit">Register</button>
+            <button type="submit" class="btn btn-info">Register</button>
         </form>
     </div>
 </div>
