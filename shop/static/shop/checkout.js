@@ -1,31 +1,4 @@
-{% extends 'shop/base.html' %}
-
-{% block content %}
-<div class="row">
-    <div class="col-md-12">
-        <ul class="list-group" id="product_list">
-        </ul>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <form method="POST">
-            {% csrf_token %}
-            {% for field in form %}
-            <div class="form-group">
-                {% if not field.is_hidden %}
-                <label> {{ field.label }} </label>
-                {% endif %}
-                {{ field }}
-            </div>
-            {% endfor %}
-            <button type="submit" class="btn btn-primary">Place Order</button>
-        </form>
-    </div>
-</div>
-{% endblock %}
-
-{% block js_section %}
+console.log("imported");
 
 if (localStorage.getItem('cart') == null) {
         var cart = {};
@@ -74,4 +47,3 @@ if (localStorage.getItem('cart') == null) {
     $('#product_list').append(total_price);
     $('#items').val(JSON.stringify(cart));
     $('#total').val(cart_total);
-{% endblock %}
