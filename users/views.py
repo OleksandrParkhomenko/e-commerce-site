@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import RegisterForm
+from .forms import RegisterForm, LoginForm
 
 
 def register(request):
@@ -9,7 +9,7 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Welcome {username}, your account is created!')
+            messages.success(request, f'Congratulations {username}! Your account is created!')
             return redirect('login')
     else:
         form = RegisterForm()
