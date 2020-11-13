@@ -30,7 +30,7 @@
                         Cart <span class="badge badge-warning" id="cart-badge"></span>
                     </button>
                     {% if user.is_authenticated %}
-                    <a href="#" class="nav-item nav-link btn btn-light">Logout</a>
+                    <a href="{% url 'login' %}" class="nav-item nav-link btn btn-light">Logout</a>
                     <a href="#" class="nav-item nav-link btn btn-light">Profile</a>
                     {% else %}
                     <a href="{% url 'login' %}" class="nav-item nav-link btn btn-light">Login</a>
