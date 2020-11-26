@@ -27,7 +27,7 @@ class RegisterForm(UserCreationForm):
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(
-        widget=forms.PasswordInput(
+        widget=forms.TextInput(
             attrs={'class': 'form-control',
                    'placeholder': 'johnsmith1972'})
     )
