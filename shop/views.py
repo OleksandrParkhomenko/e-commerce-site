@@ -6,20 +6,26 @@ from .forms import OrderForm
 
 def index(request):
     products = Product.objects.all()
+    page_title = "Homepage"
 
     # search
     item_name = request.GET.get('item_name')
     if item_name != "" and item_name is not None:
         products = Product.objects.filter(title__icontains=item_name)
+        page_title = "Search for '{}'".format(item_name)
 
     # pagination
     paginator = Paginator(products, 4)
     page = request.GET.get('page')
     products = paginator.get_page(page)
+    if products.end_index() > 1:
+        page_title += " | Page {}".format(products.number)
 
     context = {
-        'products': products
+        'products': products,
+        'page_title': page_title
     }
+
     return render(request, 'shop/index.html', context)
 
 
@@ -27,6 +33,7 @@ def detail(request, id):
     object = Product.objects.get(pk=id)
     context = {
         'object': object,
+        'page_title': object.title
     }
     return render(request, 'shop/detail.html', context)
 
@@ -39,5 +46,6 @@ def checkout(request):
         print("invalid")
     context = {
         'form': form,
+        'page_title': "Checkout"
     }
     return render(request, 'shop/checkout.html', context)
