@@ -10,9 +10,15 @@
             <div class="card-body">
                 <div id="title-{{ product.id }}" class="card-title">{{ product.title }}</div>
                 <div id="price-{{ product.id }}" class="card-text"> ${{ product.price }}</div>
+                <small id="user-{{ product.id }}" class="text-muted font-italic"> Added by {{ product.user }}</small>
 
-                <a href="{% url 'detail' product.id %}" class="btn btn-warning">View</a>
-                <button id="{{ product.id }}" class="btn atc btn-warning">Add to cart</button>
+                <div class="row pl-2">
+                    <a href="{% url 'detail' product.id %}" class="btn btn-warning">View</a>
+                    <button id="{{ product.id }}" class="btn atc btn-warning mx-1">Add to cart</button>
+                    {% if product.user == user %}
+                        <a class="btn btn-light border fa fa-pencil"></a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

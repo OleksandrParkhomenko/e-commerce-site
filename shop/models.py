@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -8,6 +9,7 @@ class Product(models.Model):
     category = models.CharField(max_length=200)
     description = models.TextField()
     image = models.CharField(max_length=300)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
 
 class Order(models.Model):
