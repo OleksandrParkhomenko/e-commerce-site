@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', shop_views.index, name='index'),
     path('<int:id>/', shop_views.detail, name='detail'),
+    path('add/', shop_views.create_product, name='create_product'),
     path('checkout/', shop_views.checkout, name='checkout'),
     path('login/',
          authentication_views.LoginView.as_view(template_name='users/login.html', authentication_form=LoginForm),

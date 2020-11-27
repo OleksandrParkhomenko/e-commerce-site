@@ -33,6 +33,7 @@
                     {% if user.is_authenticated %}
                     <a href="{% url 'logout' %}" class="nav-item nav-link btn btn-light">Logout</a>
                     <a href="{% url 'profile' %}" class="nav-item nav-link btn btn-light">Profile</a>
+                    <a href="{% url 'create_product' %}" class="nav-item nav-link btn btn-light">Add product</a>
                     {% else %}
                     <a href="{% url 'login' %}" class="nav-item nav-link btn btn-light">Login</a>
                     <a href="{% url 'register' %}" class="nav-item nav-link btn btn-light">Register</a>
