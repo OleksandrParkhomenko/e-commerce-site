@@ -1,5 +1,5 @@
 from django import forms
-from .models import Order
+from .models import Order, Product
 
 
 class OrderForm(forms.ModelForm):
@@ -23,4 +23,22 @@ class OrderForm(forms.ModelForm):
                 attrs={'class': 'form-control', 'placeholder': 'Zipcode'}),
             'total': forms.HiddenInput(
                 attrs={'id': 'total'}),
+        }
+
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['title', 'price', 'category', 'description']
+        widgets = {
+            'title': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'ExampleTV Smart 42\''}),
+            'price': forms.NumberInput(
+                attrs={'class': 'form-control', 'placeholder': '$500'}),
+            'category': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'Electronics'}),
+            'description': forms.Textarea(
+                attrs={'class': 'form-control', 'placeholder': 'Enter your product description'}),
+            'user': forms.HiddenInput(
+                attrs={'id': 'user'}),
         }

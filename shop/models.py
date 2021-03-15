@@ -1,14 +1,22 @@
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 
 
 class Product(models.Model):
+    def get_product_picture_filename(self, filename):
+        folder = "product_pictures/"
+        time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        extension = filename.split('.')[-1]
+        return "{}product-picture-{}.{}".format(folder, time, extension)
+
     title = models.CharField(max_length=200)
     price = models.FloatField()
-    discount_price = models.FloatField()
+    discount_price = models.FloatField(null=True, blank=True)
     category = models.CharField(max_length=200)
-    description = models.TextField()
-    image = models.CharField(max_length=300)
+    description = models.TextField(blank=True)
+    image = models.ImageField(default='default/product-picture.png', upload_to=get_product_picture_filename)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
 

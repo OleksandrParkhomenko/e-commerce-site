@@ -3,8 +3,20 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
-        <h1> This page is for creating new product.</h1>
+    <div class="col-md-12">
+        <form method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="invalid-feedback">
+                    {{ field.error }}
+                </div>
+                {% if not field.is_hidden %}
+                    <label>{{ field.label}}</label>
+                {% endif %}
+                {{ field }}
+            {% endfor %}
+            <button class="btn btn-info mt-1" type="submit">Add product</button>
+        </form>
     </div>
 </div>
 {% endblock %}

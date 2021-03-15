@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from .models import Product
-from .forms import OrderForm
+from .forms import OrderForm, ProductForm
 
 
 def index(request):
@@ -41,7 +41,13 @@ def detail(request, id):
 
 @login_required
 def create_product(request):
+    form = ProductForm(request.POST)
+    if form.is_valid():
+        form.save()
+    else:
+        print("invalid")
     context = {
+        'form': form,
         'page_title': 'Add new product'
     }
     return render(request, 'shop/create_product.html', context)
